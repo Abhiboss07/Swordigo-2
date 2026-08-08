@@ -1,0 +1,7 @@
+.godot/
+*.translation
+*.tmp
+*.apk
+reverse_engineering/intermediate/
+reverse_engineering/extracted_assets/
+builds/
