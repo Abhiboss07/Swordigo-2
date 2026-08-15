@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "project": "Swordigo V2 / Ironvale",
+  "pipeline": "Clean-Room Godot 4.4 Asset Pipeline",
+  "provenance_standard": "100% Original and Procedurally Generated Low-Poly Assets",
+  "assets": [
+    {
+      "id": "hero_model",
+      "type": "model_3d",
+      "destination": "res://assets/models/player/hero_mesh.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "enemy_goblin_model",
+      "type": "model_3d",
+      "destination": "res://assets/models/enemies/goblin_mesh.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "enemy_bat_model",
+      "type": "model_3d",
+      "destination": "res://assets/models/enemies/bat_mesh.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "enemy_boar_model",
+      "type": "model_3d",
+      "destination": "res://assets/models/enemies/boar_mesh.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "boss_wickframe_model",
+      "type": "model_3d",
+      "destination": "res://assets/models/bosses/wickframe_mesh.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "chest_model",
+      "type": "prop_3d",
+      "destination": "res://assets/models/props/chest.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "pot_breakable_model",
+      "type": "prop_3d",
+      "destination": "res://assets/models/props/pot_breakable.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "checkpoint_monument_model",
+      "type": "prop_3d",
+      "destination": "res://assets/models/props/checkpoint_monument.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "portal_arch_model",
+      "type": "prop_3d",
+      "destination": "res://assets/models/props/portal_arch.tscn",
+      "format": "tscn / low-poly CSG mesh",
+      "source": "Original procedural model",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "magic_bolt_vfx",
+      "type": "particle_vfx",
+      "destination": "res://scenes/entities/magic_bolt.tscn",
+      "format": "GPUParticles3D / MeshInstance3D",
+      "source": "Original procedural VFX",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "nova_burst_vfx",
+      "type": "particle_vfx",
+      "destination": "res://scenes/entities/nova_burst.tscn",
+      "format": "GPUParticles3D",
+      "source": "Original procedural VFX",
+      "status": "active",
+      "verification": "verified"
+    },
+    {
+      "id": "audio_sfx_suite",
+      "type": "audio_sfx",
+      "destination": "res://scripts/systems/audio_manager.gd",
+      "format": "Procedural AudioStreamGenerator / WAV",
+      "source": "Procedural real-time synthesis",
+      "status": "active",
+      "verification": "verified"
+    }
+  ]
+}
