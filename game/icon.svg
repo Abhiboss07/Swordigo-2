@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="twilight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#081220;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#142844;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mageblade" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b2ebf2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#twilight)" />
+  <!-- Swordigo Carved Gold Blade Border -->
+  <polygon points="64,14 75,46 71,90 64,98 57,90 53,46" fill="url(#mageblade)" stroke="#facb47" stroke-width="2.5" />
+  <!-- Crossguard -->
+  <rect x="40" y="88" width="48" height="10" rx="3" fill="#facb47" stroke="#b8860b" stroke-width="1.5" />
+  <!-- Grip -->
+  <rect x="60" y="98" width="8" height="18" rx="2" fill="#2e1b10" />
+  <!-- Pommel -->
+  <circle cx="64" cy="118" r="6" fill="#facb47" stroke="#b8860b" stroke-width="1.5" />
+  <!-- Cyan Mageblade Arc Spark -->
+  <circle cx="64" cy="52" r="9" fill="#00e5ff" opacity="0.8" />
+</svg>
