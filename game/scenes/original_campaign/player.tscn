@@ -1,0 +1,132 @@
+[gd_scene load_steps=18 format=3 uid="uid://c6playerchara25d"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
+radius = 0.4
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tunic"]
+albedo_color = Color(0, 0.67, 0.75, 1)
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tunic"]
+material = SubResource("StandardMaterial3D_tunic")
+radius = 0.36
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_belt"]
+albedo_color = Color(0.3, 0.18, 0.12, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_belt"]
+material = SubResource("StandardMaterial3D_belt")
+top_radius = 0.38
+bottom_radius = 0.38
+height = 0.12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boots"]
+albedo_color = Color(0.24, 0.15, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_legs"]
+material = SubResource("StandardMaterial3D_boots")
+size = Vector3(0.5, 0.45, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(1, 0.88, 0.72, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_skin")
+radius = 0.24
+height = 0.48
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hair"]
+albedo_color = Color(0.08, 0.4, 0.78, 1)
+roughness = 0.4
+
+[sub_resource type="PrismMesh" id="PrismMesh_hair_spikes"]
+material = SubResource("StandardMaterial3D_hair")
+size = Vector3(0.48, 0.32, 0.48)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blade"]
+metallic = 0.85
+roughness = 0.2
+albedo_color = Color(0.95, 0.95, 0.98, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blade"]
+material = SubResource("StandardMaterial3D_blade")
+size = Vector3(0.08, 0.9, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crossguard"]
+metallic = 0.9
+roughness = 0.3
+albedo_color = Color(0.98, 0.79, 0.28, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_guard"]
+material = SubResource("StandardMaterial3D_crossguard")
+size = Vector3(0.24, 0.06, 0.08)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_weapon"]
+size = Vector3(1.3, 1.3, 1.0)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurtbox"]
+radius = 0.42
+height = 1.6
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="TunicMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CapsuleMesh_tunic")
+
+[node name="BeltMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("CylinderMesh_belt")
+
+[node name="BootsMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22, 0)
+mesh = SubResource("BoxMesh_legs")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+mesh = SubResource("SphereMesh_head")
+
+[node name="BlueHairSpikes" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+mesh = SubResource("PrismMesh_hair_spikes")
+
+[node name="SwordPivot" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.75, 0)
+
+[node name="SwordMesh" type="MeshInstance3D" parent="Visuals/SwordPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
+mesh = SubResource("BoxMesh_blade")
+
+[node name="GuardMesh" type="MeshInstance3D" parent="Visuals/SwordPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
+mesh = SubResource("BoxMesh_guard")
+
+[node name="WeaponHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 8
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/WeaponHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.8, 0)
+shape = SubResource("BoxShape3D_weapon")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 48
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_hurtbox")
