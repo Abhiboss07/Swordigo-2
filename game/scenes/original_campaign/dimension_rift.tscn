@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://d6dimensionriftxx"]
+
+[ext_resource type="Script" path="res://scripts/dimension_rift.gd" id="1_rift"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rift"]
+radius = 2.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rift"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.68, 0.2, 0.95, 0.45)
+
+[sub_resource type="TorusMesh" id="TorusMesh_rift"]
+material = SubResource("StandardMaterial3D_rift")
+inner_radius = 1.8
+outer_radius = 2.2
+
+[node name="DimensionRift" type="Area3D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_rift")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rift")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_rift")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.75, 0.25, 1, 1)
+light_energy = 3.0
+omni_range = 5.0
