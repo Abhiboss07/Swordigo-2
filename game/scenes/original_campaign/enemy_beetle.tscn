@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://b9forestbeetlexx"]
+
+[ext_resource type="Script" path="res://scripts/enemy_beetle.gd" id="1_beetle"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_root"]
+radius = 0.45
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shell"]
+albedo_color = Color(0.2, 0.35, 0.18, 1)
+roughness = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_shell"]
+material = SubResource("StandardMaterial3D_shell")
+radius = 0.4
+height = 0.55
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hitbox"]
+radius = 0.48
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hurtbox"]
+radius = 0.5
+
+[node name="EnemyBeetle" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_beetle")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_root")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="ShellMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+mesh = SubResource("SphereMesh_shell")
+
+[node name="AttackHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/AttackHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_hitbox")
+
+[node name="LedgeRay" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.2, 0)
+target_position = Vector3(0, -0.9, 0)
+
+[node name="WallRay" type="RayCast3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+target_position = Vector3(0.55, 0, 0)
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_hurtbox")
