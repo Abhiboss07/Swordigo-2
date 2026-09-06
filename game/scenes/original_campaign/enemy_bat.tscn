@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8cavebatxx"]
+
+[ext_resource type="Script" path="res://scripts/enemy_bat.gd" id="1_bat"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_root"]
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bat"]
+albedo_color = Color(0.18, 0.12, 0.28, 1)
+roughness = 0.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_body"]
+material = SubResource("StandardMaterial3D_bat")
+radius = 0.24
+height = 0.48
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wing"]
+albedo_color = Color(0.28, 0.18, 0.42, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_wing"]
+material = SubResource("StandardMaterial3D_wing")
+size = Vector3(0.55, 0.28, 0.04)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hitbox"]
+radius = 0.42
+
+[node name="EnemyBat" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_bat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_root")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("SphereMesh_body")
+
+[node name="WingLeft" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36, 0.05, 0)
+mesh = SubResource("PrismMesh_wing")
+
+[node name="WingRight" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36, 0.05, 0)
+mesh = SubResource("PrismMesh_wing")
+
+[node name="AttackHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/AttackHitbox"]
+shape = SubResource("SphereShape3D_hitbox")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("SphereShape3D_hitbox")
