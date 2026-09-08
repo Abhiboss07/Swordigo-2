@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5checkpointmonumentxx"]
+
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_chk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chk"]
+size = Vector3(1.5, 2.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_stone"]
+albedo_color = Color(0.38, 0.38, 0.4, 1)
+roughness = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+material = SubResource("StandardMaterial3D_stone")
+top_radius = 0.35
+bottom_radius = 0.5
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crystal"]
+shading_mode = 0
+albedo_color = Color(0, 0.85, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_crystal"]
+material = SubResource("StandardMaterial3D_crystal")
+size = Vector3(0.35, 0.65, 0.35)
+
+[node name="Checkpoint" type="Area3D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_chk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("BoxShape3D_chk")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CylinderMesh_base")
+
+[node name="CrystalMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+mesh = SubResource("PrismMesh_crystal")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+light_color = Color(0, 0.85, 1, 1)
+light_energy = 1.8
+omni_range = 4.0
