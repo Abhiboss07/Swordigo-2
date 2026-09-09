@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7treasurechestxx"]
+
+[ext_resource type="Script" path="res://scripts/chest.gd" id="1_chest"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
+size = Vector3(1.4, 1.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
+albedo_color = Color(0.36, 0.22, 0.14, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_base"]
+material = SubResource("StandardMaterial3D_wood")
+size = Vector3(0.9, 0.45, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lid"]
+albedo_color = Color(0.5, 0.32, 0.2, 1)
+metallic = 0.2
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_lid"]
+material = SubResource("StandardMaterial3D_lid")
+size = Vector3(0.94, 0.25, 0.64)
+
+[node name="Chest" type="Area3D"]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_chest")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_chest")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 0)
+mesh = SubResource("BoxMesh_base")
+
+[node name="LidPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.3)
+
+[node name="LidMesh" type="MeshInstance3D" parent="LidPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0.3)
+mesh = SubResource("BoxMesh_lid")
+
+[node name="PromptLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+text = "[E] Open"
+font_size = 28
+outline_size = 6
+outline_modulate = Color(0, 0, 0, 1)

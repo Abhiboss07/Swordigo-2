@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c9breakablepotxx"]
+
+[ext_resource type="Script" path="res://scripts/pot_breakable.gd" id="1_pot"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pot"]
+height = 0.7
+radius = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clay"]
+albedo_color = Color(0.72, 0.32, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pot"]
+material = SubResource("StandardMaterial3D_clay")
+top_radius = 0.28
+bottom_radius = 0.22
+height = 0.7
+
+[node name="PotBreakable" type="Area3D"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_pot")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+shape = SubResource("CylinderShape3D_pot")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+mesh = SubResource("CylinderMesh_pot")
