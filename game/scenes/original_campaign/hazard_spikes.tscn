@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8hazardspikesxx"]
+
+[ext_resource type="Script" path="res://scripts/hazard_spikes.gd" id="1_spk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spikes"]
+size = Vector3(2.2, 0.5, 1.0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metal"]
+albedo_color = Color(0.48, 0.54, 0.58, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="PrismMesh" id="PrismMesh_spike"]
+material = SubResource("StandardMaterial3D_metal")
+size = Vector3(0.4, 0.55, 0.4)
+
+[node name="HazardSpikes" type="Area3D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_spk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("BoxShape3D_spikes")
+
+[node name="Spike1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.28, 0)
+mesh = SubResource("PrismMesh_spike")
+
+[node name="Spike2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.28, 0)
+mesh = SubResource("PrismMesh_spike")
+
+[node name="Spike3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
+mesh = SubResource("PrismMesh_spike")
+
+[node name="Spike4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.28, 0)
+mesh = SubResource("PrismMesh_spike")
+
+[node name="Spike5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.28, 0)
+mesh = SubResource("PrismMesh_spike")
