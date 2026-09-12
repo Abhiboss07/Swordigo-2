@@ -1,0 +1,233 @@
+[gd_scene load_steps=5 format=3 uid="uid://hudauthentic2012"]
+
+[ext_resource type="Script" path="res://ui/hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" uid="uid://ingamehubswordigo" path="res://ui/in_game_hub.tscn" id="2_hubscene"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mana"]
+bg_color = Color(0.12, 0.42, 0.88, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss"]
+bg_color = Color(0.85, 0.15, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HUD" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hud")
+
+[node name="TopLeft" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 100.0
+
+[node name="HeartsContainer" type="HBoxContainer" parent="TopLeft"]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 24.0
+theme_override_constants/separation = 6
+
+[node name="ManaBar" type="ProgressBar" parent="TopLeft"]
+custom_minimum_size = Vector2(160, 10)
+layout_mode = 0
+offset_top = 30.0
+offset_right = 160.0
+offset_bottom = 40.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_mana")
+max_value = 10.0
+value = 10.0
+show_percentage = false
+
+[node name="LevelLabel" type="Label" parent="TopLeft"]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 60.0
+offset_bottom = 66.0
+theme_override_colors/font_color = Color(0.95, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "Lv. 1"
+
+[node name="XpBar" type="ProgressBar" parent="TopLeft"]
+custom_minimum_size = Vector2(100, 6)
+layout_mode = 0
+offset_left = 40.0
+offset_top = 51.0
+offset_right = 140.0
+offset_bottom = 57.0
+max_value = 100.0
+show_percentage = false
+
+[node name="TopRight" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 16.0
+offset_right = -20.0
+offset_bottom = 80.0
+grow_horizontal = 0
+
+[node name="CoinsHBox" type="HBoxContainer" parent="TopRight"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_right = -60.0
+offset_bottom = 32.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="CoinsIcon" type="Label" parent="TopRight/CoinsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.15, 1)
+text = "🪙"
+
+[node name="CoinsLabel" type="Label" parent="TopRight/CoinsHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.78, 0.15, 1)
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="ShardsContainer" type="HBoxContainer" parent="TopRight"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_top = 36.0
+offset_right = -60.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/separation = 4
+alignment = 2
+
+[node name="MenuBtn" type="Button" parent="TopRight"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_bottom = 48.0
+grow_horizontal = 0
+text = "⚙"
+
+[node name="TopCenter" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 16.0
+offset_right = 200.0
+offset_bottom = 80.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="BossContainer" type="VBoxContainer" parent="TopCenter"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="BossName" type="Label" parent="TopCenter/BossContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 16
+text = "The Corruptor"
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="TopCenter/BossContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_boss")
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="TouchControls" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dpad" type="HBoxContainer" parent="TouchControls"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -120.0
+offset_right = 210.0
+offset_bottom = -30.0
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="BtnLeft" type="Button" parent="TouchControls/Dpad"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+text = "◀"
+
+[node name="BtnRight" type="Button" parent="TouchControls/Dpad"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+text = "▶"
+
+[node name="Actions" type="HBoxContainer" parent="TouchControls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -120.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="BtnSpell" type="Button" parent="TouchControls/Actions"]
+custom_minimum_size = Vector2(76, 76)
+layout_mode = 2
+text = "✨"
+
+[node name="BtnAttack" type="Button" parent="TouchControls/Actions"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+text = "⚔"
+
+[node name="BtnJump" type="Button" parent="TouchControls/Actions"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+text = "▲"
+
+[node name="InGameHub" parent="." instance=ExtResource("2_hubscene")]
+visible = false
+layout_mode = 1
