@@ -1,0 +1,380 @@
+[gd_scene load_steps=3 format=3 uid="uid://ingamehubswordigo"]
+
+[ext_resource type="Script" path="res://ui/in_game_hub.gd" id="1_hub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hub"]
+bg_color = Color(0.06, 0.08, 0.12, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.7, 0.2, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="InGameHub" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hub")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0.75)
+
+[node name="DockMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 180.0
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="DockVBox" type="VBoxContainer" parent="DockMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TabCharacter" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "Character"
+
+[node name="TabInventory" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "Inventory"
+
+[node name="TabMap" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "World Map"
+
+[node name="TabQuests" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "Quests"
+
+[node name="TabSettings" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "Settings"
+
+[node name="Spacer" type="Control" parent="DockMargin/DockVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabBack" type="Button" parent="DockMargin/DockVBox"]
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+text = "Resume Game"
+
+[node name="ContentPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 190.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hub")
+
+[node name="CharacterTab" type="Control" parent="ContentPanel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ContentPanel/CharacterTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="LevelLabel" type="Label" parent="ContentPanel/CharacterTab/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.75, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "Hero — Level 1"
+
+[node name="XpBar" type="ProgressBar" parent="ContentPanel/CharacterTab/VBox"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="StatsGrid" type="GridContainer" parent="ContentPanel/CharacterTab/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="HpLabel" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "Health:"
+
+[node name="HpVal" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "5 HP"
+
+[node name="AtkLabel" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "Attack Power:"
+
+[node name="AtkVal" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "5 Damage"
+
+[node name="MagLabel" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "Magic Power:"
+
+[node name="MagVal" type="Label" parent="ContentPanel/CharacterTab/VBox/StatsGrid"]
+layout_mode = 2
+text = "10 Power"
+
+[node name="MagebladeSection" type="VBoxContainer" parent="ContentPanel/CharacterTab/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ShardsTitle" type="Label" parent="ContentPanel/CharacterTab/VBox/MagebladeSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.8, 0.95, 1)
+text = "Mageblade Shards Recovered:"
+
+[node name="ShardsHBox" type="HBoxContainer" parent="ContentPanel/CharacterTab/VBox/MagebladeSection"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Shard1" type="Label" parent="ContentPanel/CharacterTab/VBox/MagebladeSection/ShardsHBox"]
+layout_mode = 2
+text = "[ Shard 1: Missing ]"
+
+[node name="Shard2" type="Label" parent="ContentPanel/CharacterTab/VBox/MagebladeSection/ShardsHBox"]
+layout_mode = 2
+text = "[ Shard 2: Missing ]"
+
+[node name="Shard3" type="Label" parent="ContentPanel/CharacterTab/VBox/MagebladeSection/ShardsHBox"]
+layout_mode = 2
+text = "[ Shard 3: Missing ]"
+
+[node name="Shard4" type="Label" parent="ContentPanel/CharacterTab/VBox/MagebladeSection/ShardsHBox"]
+layout_mode = 2
+text = "[ Shard 4: Missing ]"
+
+[node name="InventoryTab" type="Control" parent="ContentPanel"]
+visible = false
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ContentPanel/InventoryTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="EquipCards" type="HBoxContainer" parent="ContentPanel/InventoryTab/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="WeaponCard" type="VBoxContainer" parent="ContentPanel/InventoryTab/VBox/EquipCards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/WeaponCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+text = "Weapon"
+
+[node name="Val" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/WeaponCard"]
+layout_mode = 2
+text = "Brass Sword"
+
+[node name="ArmorCard" type="VBoxContainer" parent="ContentPanel/InventoryTab/VBox/EquipCards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/ArmorCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+text = "Armor"
+
+[node name="Val" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/ArmorCard"]
+layout_mode = 2
+text = "Cloth Tunic"
+
+[node name="SpellCard" type="VBoxContainer" parent="ContentPanel/InventoryTab/VBox/EquipCards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/SpellCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+text = "Spell"
+
+[node name="Val" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/SpellCard"]
+layout_mode = 2
+text = "Magic Bolt"
+
+[node name="Trinket1Card" type="VBoxContainer" parent="ContentPanel/InventoryTab/VBox/EquipCards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/Trinket1Card"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+text = "Trinket 1"
+
+[node name="Val" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/Trinket1Card"]
+layout_mode = 2
+text = "None"
+
+[node name="Trinket2Card" type="VBoxContainer" parent="ContentPanel/InventoryTab/VBox/EquipCards"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/Trinket2Card"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+text = "Trinket 2"
+
+[node name="Val" type="Label" parent="ContentPanel/InventoryTab/VBox/EquipCards/Trinket2Card"]
+layout_mode = 2
+text = "None"
+
+[node name="ItemsHBox" type="HBoxContainer" parent="ContentPanel/InventoryTab/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="ItemList" type="ItemList" parent="ContentPanel/InventoryTab/VBox/ItemsHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UseBtn" type="Button" parent="ContentPanel/InventoryTab/VBox/ItemsHBox"]
+custom_minimum_size = Vector2(100, 44)
+layout_mode = 2
+text = "Use Item"
+
+[node name="WorldMapTab" type="Control" parent="ContentPanel"]
+visible = false
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ContentPanel/WorldMapTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="MapTitle" type="Label" parent="ContentPanel/WorldMapTab/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.7, 0.2, 1)
+theme_override_font_sizes/font_size = 20
+text = "Realm of Iselon"
+
+[node name="MapInfo" type="Label" parent="ContentPanel/WorldMapTab/VBox"]
+layout_mode = 2
+text = "Cairnwood Forest (Active)
+Portal Stones connected: Cairnwood Crossroads, Florennum Gates, World's End."
+
+[node name="QuestsTab" type="Control" parent="ContentPanel"]
+visible = false
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="ContentPanel/QuestsTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestsVBox" type="VBoxContainer" parent="ContentPanel/QuestsTab/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="SettingsTab" type="Control" parent="ContentPanel"]
+visible = false
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="ContentPanel/SettingsTab"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="SfxTitle" type="Label" parent="ContentPanel/SettingsTab/VBox"]
+layout_mode = 2
+text = "Sound Effects Volume:"
+
+[node name="SfxSlider" type="HSlider" parent="ContentPanel/SettingsTab/VBox"]
+layout_mode = 2
+value = 80.0
+
+[node name="MusicTitle" type="Label" parent="ContentPanel/SettingsTab/VBox"]
+layout_mode = 2
+text = "Music Volume:"
+
+[node name="MusicSlider" type="HSlider" parent="ContentPanel/SettingsTab/VBox"]
+layout_mode = 2
+value = 75.0
+
+[node name="SaveGameBtn" type="Button" parent="ContentPanel/SettingsTab/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "Save Game Now"
+
+[node name="SaveStatusLabel" type="Label" parent="ContentPanel/SettingsTab/VBox"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.4, 1)
+text = "Game Saved!"
+horizontal_alignment = 1
+
+[node name="TitleBtn" type="Button" parent="ContentPanel/SettingsTab/VBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "Return to Main Menu"
