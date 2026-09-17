@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8bosscorruptorxx"]
+
+[ext_resource type="Script" path="res://scripts/boss_corruptor.gd" id="1_corr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_root"]
+radius = 0.95
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shadow"]
+albedo_color = Color(0.08, 0.05, 0.14, 1)
+roughness = 0.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_torso"]
+material = SubResource("StandardMaterial3D_shadow")
+radius = 0.8
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_horns"]
+albedo_color = Color(0.25, 0.08, 0.32, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_horn"]
+material = SubResource("StandardMaterial3D_horns")
+size = Vector3(0.35, 0.9, 0.35)
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+material = SubResource("StandardMaterial3D_shadow")
+radius = 0.48
+height = 0.95
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slam"]
+size = Vector3(5.0, 1.2, 2.0)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurtbox"]
+radius = 1.05
+height = 3.1
+
+[node name="BossCorruptor" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_corr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_root")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="TorsoMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CapsuleMesh_torso")
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
+mesh = SubResource("SphereMesh_head")
+
+[node name="LeftHorn" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -0.45, 2.9, 0)
+mesh = SubResource("PrismMesh_horn")
+
+[node name="RightHorn" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0.45, 2.9, 0)
+mesh = SubResource("PrismMesh_horn")
+
+[node name="EyeGlow" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0.5)
+light_color = Color(1, 0.15, 0.2, 1)
+light_energy = 3.0
+omni_range = 3.0
+
+[node name="DarkAura" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+light_color = Color(0.65, 0.15, 0.95, 1)
+light_energy = 2.0
+omni_range = 5.0
+
+[node name="SlamHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/SlamHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("BoxShape3D_slam")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_hurtbox")

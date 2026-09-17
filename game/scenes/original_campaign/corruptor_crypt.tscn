@@ -1,0 +1,166 @@
+[gd_scene load_steps=24 format=3 uid="uid://corruptorcryptdungeon"]
+
+[ext_resource type="PackedScene" uid="uid://c6playerchara25d" path="res://scenes/original_campaign/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://e4cameracontrollerxx" path="res://scenes/original_campaign/camera_controller.tscn" id="2_cam"]
+[ext_resource type="PackedScene" uid="uid://s8corruptskeletonxx" path="res://scenes/original_campaign/enemy_skeleton.tscn" id="3_skel"]
+[ext_resource type="PackedScene" uid="uid://b8cavebatxx" path="res://scenes/original_campaign/enemy_bat.tscn" id="4_bat"]
+[ext_resource type="PackedScene" uid="uid://c8bosscorruptorxx" path="res://scenes/original_campaign/boss_corruptor.tscn" id="5_boss"]
+[ext_resource type="PackedScene" uid="uid://c5checkpointmonumentxx" path="res://scenes/original_campaign/checkpoint.tscn" id="6_cp"]
+[ext_resource type="PackedScene" uid="uid://c2crystalswitchxx" path="res://scenes/original_campaign/crystal_switch.tscn" id="7_switch"]
+[ext_resource type="PackedScene" uid="uid://m4movingplatformxx" path="res://scenes/original_campaign/moving_platform.tscn" id="8_plat"]
+[ext_resource type="PackedScene" uid="uid://c8hazardspikesxx" path="res://scenes/original_campaign/hazard_spikes.tscn" id="9_spikes"]
+[ext_resource type="PackedScene" uid="uid://c9breakablepotxx" path="res://scenes/original_campaign/pot_breakable.tscn" id="10_pot"]
+[ext_resource type="PackedScene" uid="uid://c7treasurechestxx" path="res://scenes/original_campaign/chest.tscn" id="11_chest"]
+[ext_resource type="PackedScene" uid="uid://p4portaltransitionxx" path="res://scenes/original_campaign/portal.tscn" id="12_portal"]
+[ext_resource type="PackedScene" uid="uid://hudauthentic2012" path="res://ui/hud.tscn" id="13_hud"]
+[ext_resource type="PackedScene" uid="uid://g8gameovermenuxx" path="res://ui/game_over_menu.tscn" id="14_gameover"]
+[ext_resource type="PackedScene" uid="uid://d4dialogueboxxx" path="res://ui/dialogue_box.tscn" id="15_dialogue"]
+
+[sub_resource type="Environment" id="Environment_crypt"]
+background_mode = 1
+background_color = Color(0.04, 0.03, 0.07, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.2, 0.16, 0.28, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dungeon_stone"]
+albedo_color = Color(0.28, 0.26, 0.32, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_entrance"]
+material = SubResource("StandardMaterial3D_dungeon_stone")
+size = Vector3(20, 4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_entrance"]
+size = Vector3(20, 4, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mid_hall"]
+material = SubResource("StandardMaterial3D_dungeon_stone")
+size = Vector3(24, 4, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mid_hall"]
+size = Vector3(24, 4, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_boss_arena"]
+material = SubResource("StandardMaterial3D_dungeon_stone")
+size = Vector3(36, 4, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boss_arena"]
+size = Vector3(36, 4, 8)
+
+[node name="CorruptorCrypt" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_crypt")
+
+[node name="OmniLightEntrance" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 3, 0)
+light_color = Color(0.4, 0.6, 0.9, 1)
+light_energy = 2.0
+omni_range = 14.0
+
+[node name="OmniLightBoss" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 5, 0)
+light_color = Color(0.85, 0.25, 0.35, 1)
+light_energy = 2.5
+omni_range = 22.0
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="EntranceFloor" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, -2, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/EntranceFloor"]
+mesh = SubResource("BoxMesh_entrance")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/EntranceFloor"]
+shape = SubResource("BoxShape3D_entrance")
+
+[node name="MidHallFloor" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -2, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/MidHallFloor"]
+mesh = SubResource("BoxMesh_mid_hall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/MidHallFloor"]
+shape = SubResource("BoxShape3D_mid_hall")
+
+[node name="BossArenaFloor" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, -2, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/BossArenaFloor"]
+mesh = SubResource("BoxMesh_boss_arena")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/BossArenaFloor"]
+shape = SubResource("BoxShape3D_boss_arena")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn_Default" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0.5, 0)
+
+[node name="Spawn_FromCrossroads" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0.5, 0)
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0.5, 0)
+
+[node name="CameraController" parent="Entities" instance=ExtResource("2_cam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 2, 0)
+
+[node name="MovingPlatform1" parent="Entities" instance=ExtResource("8_plat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+target_offset = Vector3(6, 0, 0)
+move_duration = 2.5
+
+[node name="HazardSpikes1" parent="Entities" instance=ExtResource("9_spikes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -4, 0)
+
+[node name="EnemyBat1" parent="Entities" instance=ExtResource("4_bat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 0)
+
+[node name="EnemySkeleton1" parent="Entities" instance=ExtResource("3_skel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.8, 0)
+
+[node name="CrystalSwitch1" parent="Entities" instance=ExtResource("7_switch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, 0)
+switch_id = "crypt_boss_gate"
+
+[node name="CheckpointBoss" parent="Entities" instance=ExtResource("6_cp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+checkpoint_id = "crypt_boss_cp"
+
+[node name="BossCorruptor" parent="Entities" instance=ExtResource("5_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1.2, 0)
+drops_shard = "iselon_shard_1"
+
+[node name="CryptChest" parent="Entities" instance=ExtResource("11_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0.8, 0)
+chest_id = "crypt_trophy_chest"
+contains_item = "healing_potion"
+contains_coins = 120
+
+[node name="Pot1" parent="Entities" instance=ExtResource("10_pot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="Pot2" parent="Entities" instance=ExtResource("10_pot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
+
+[node name="PortalBack" parent="Entities" instance=ExtResource("12_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 0)
+target_scene_path = "res://scenes/original_campaign/cairnwood_crossroads.tscn"
+target_spawn_name = "Spawn_FromCrypt"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("13_hud")]
+
+[node name="GameOverMenu" parent="UI" instance=ExtResource("14_gameover")]
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("15_dialogue")]
