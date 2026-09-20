@@ -1,0 +1,167 @@
+[gd_scene load_steps=24 format=3 uid="uid://chambermagebladescene"]
+
+[ext_resource type="PackedScene" uid="uid://c6playerchara25d" path="res://scenes/original_campaign/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://e4cameracontrollerxx" path="res://scenes/original_campaign/camera_controller.tscn" id="2_cam"]
+[ext_resource type="PackedScene" uid="uid://c8bosscorruptorxx" path="res://scenes/original_campaign/boss_corruptor.tscn" id="3_boss"]
+[ext_resource type="PackedScene" uid="uid://c5checkpointmonumentxx" path="res://scenes/original_campaign/checkpoint.tscn" id="4_cp"]
+[ext_resource type="PackedScene" uid="uid://c9breakablepotxx" path="res://scenes/original_campaign/pot_breakable.tscn" id="5_pot"]
+[ext_resource type="PackedScene" uid="uid://c7treasurechestxx" path="res://scenes/original_campaign/chest.tscn" id="6_chest"]
+[ext_resource type="PackedScene" uid="uid://p4portaltransitionxx" path="res://scenes/original_campaign/portal.tscn" id="7_portal"]
+[ext_resource type="PackedScene" uid="uid://hudauthentic2012" path="res://ui/hud.tscn" id="8_hud"]
+[ext_resource type="PackedScene" uid="uid://g8gameovermenuxx" path="res://ui/game_over_menu.tscn" id="9_gameover"]
+[ext_resource type="PackedScene" uid="uid://d4dialogueboxxx" path="res://ui/dialogue_box.tscn" id="10_dialogue"]
+[ext_resource type="Script" path="res://scripts/altar_mageblade.gd" id="11_altar"]
+
+[sub_resource type="Environment" id="Environment_sanctuary"]
+background_mode = 1
+background_color = Color(0.06, 0.08, 0.16, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.45, 0.65, 1)
+ambient_light_energy = 0.95
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sacred_marble"]
+albedo_color = Color(0.85, 0.88, 0.92, 1)
+roughness = 0.4
+metallic = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_sanctuary_floor"]
+material = SubResource("StandardMaterial3D_sacred_marble")
+size = Vector3(56, 4, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sanctuary_floor"]
+size = Vector3(56, 4, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_altar_gold"]
+albedo_color = Color(0.95, 0.78, 0.22, 1)
+metallic = 0.8
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_altar_base"]
+material = SubResource("StandardMaterial3D_altar_gold")
+top_radius = 1.2
+bottom_radius = 1.6
+height = 1.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_altar"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cyan_crystal"]
+albedo_color = Color(0.2, 0.85, 1.0, 1)
+emission_enabled = true
+emission = Color(0.2, 0.85, 1.0, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_blade_pedestal"]
+material = SubResource("StandardMaterial3D_cyan_crystal")
+size = Vector3(0.12, 1.2, 0.06)
+
+[node name="ChamberMageblade" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sanctuary")
+
+[node name="SanctuaryLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+light_color = Color(0.3, 0.75, 1, 1)
+light_energy = 3.5
+omni_range = 28.0
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="SanctuaryFloor" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/SanctuaryFloor"]
+mesh = SubResource("BoxMesh_sanctuary_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/SanctuaryFloor"]
+shape = SubResource("BoxShape3D_sanctuary_floor")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn_Default" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.5, 0)
+
+[node name="Spawn_FromEnd" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.5, 0)
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.5, 0)
+
+[node name="CameraController" parent="Entities" instance=ExtResource("2_cam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 2, 0)
+
+[node name="CheckpointSanctuary" parent="Entities" instance=ExtResource("4_cp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+checkpoint_id = "chamber_mageblade_cp"
+
+[node name="AltarMageblade" type="Area3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("11_altar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/AltarMageblade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_altar")
+
+[node name="AltarBase" type="MeshInstance3D" parent="Entities/AltarMageblade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("CylinderMesh_altar_base")
+
+[node name="SwordVisual" type="Node3D" parent="Entities/AltarMageblade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="BladeMesh" type="MeshInstance3D" parent="Entities/AltarMageblade/SwordVisual"]
+mesh = SubResource("BoxMesh_blade_pedestal")
+
+[node name="AltarGlow" type="OmniLight3D" parent="Entities/AltarMageblade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.2, 0.85, 1, 1)
+light_energy = 3.0
+omni_range = 8.0
+
+[node name="PromptLabel" type="Label3D" parent="Entities/AltarMageblade"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+text = "[E] Reforge The Mageblade"
+font_size = 28
+outline_size = 6
+outline_modulate = Color(0, 0, 0, 1)
+
+[node name="FinalBoss" parent="Entities" instance=ExtResource("3_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.2, 0)
+max_health = 180
+damage = 25
+
+[node name="ChestTriumph" parent="Entities" instance=ExtResource("6_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+chest_id = "sanctuary_triumph_chest"
+contains_coins = 500
+
+[node name="Pot1" parent="Entities" instance=ExtResource("5_pot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 0)
+
+[node name="Pot2" parent="Entities" instance=ExtResource("5_pot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="PortalToVictory" parent="Entities" instance=ExtResource("7_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
+target_scene_path = "res://ui/main_menu.tscn"
+target_spawn_name = "Spawn_Default"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("8_hud")]
+
+[node name="GameOverMenu" parent="UI" instance=ExtResource("9_gameover")]
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("10_dialogue")]
