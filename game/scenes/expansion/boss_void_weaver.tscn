@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://bossvoidweaverxx"]
+
+[ext_resource type="Script" path="res://scripts/boss_void_weaver.gd" id="1_weaver"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_root"]
+radius = 0.9
+height = 2.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_astral_chitin"]
+albedo_color = Color(0.12, 0.08, 0.22, 1)
+roughness = 0.4
+emission_enabled = true
+emission = Color(0.3, 0.15, 0.55, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_body"]
+material = SubResource("StandardMaterial3D_astral_chitin")
+radius = 0.85
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weaver_eye"]
+albedo_color = Color(0.2, 0.9, 1.0, 1)
+emission_enabled = true
+emission = Color(0.2, 0.9, 1.0, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_eye"]
+material = SubResource("StandardMaterial3D_weaver_eye")
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_leg"]
+albedo_color = Color(0.18, 0.12, 0.3, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_leg"]
+material = SubResource("StandardMaterial3D_leg")
+top_radius = 0.06
+bottom_radius = 0.02
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hitbox"]
+size = Vector3(2.2, 2.0, 1.4)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nova"]
+radius = 3.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurtbox"]
+radius = 0.95
+height = 2.5
+
+[node name="BossVoidWeaver" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("1_weaver")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_root")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("SphereMesh_body")
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.4, 0.6)
+mesh = SubResource("SphereMesh_eye")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 1.4, 0.6)
+mesh = SubResource("SphereMesh_eye")
+
+[node name="LegFrontRight" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 1.0, 0.9, 0)
+mesh = SubResource("CylinderMesh_leg")
+
+[node name="LegFrontLeft" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -1.0, 0.9, 0)
+mesh = SubResource("CylinderMesh_leg")
+
+[node name="AstralCoreLight" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+light_color = Color(0.65, 0.3, 0.95, 1)
+light_energy = 3.0
+omni_range = 10.0
+
+[node name="AttackHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/AttackHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("BoxShape3D_hitbox")
+
+[node name="NovaHitbox" type="Area3D" parent="Visuals"]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals/NovaHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_nova")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("CapsuleShape3D_hurtbox")

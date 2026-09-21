@@ -1,0 +1,149 @@
+[gd_scene load_steps=22 format=3 uid="uid://sequelsunkencatacombsscene"]
+
+[ext_resource type="PackedScene" uid="uid://c6playerchara25d" path="res://scenes/original_campaign/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://e4cameracontrollerxx" path="res://scenes/original_campaign/camera_controller.tscn" id="2_cam"]
+[ext_resource type="PackedScene" uid="uid://b8cavebatxx" path="res://scenes/original_campaign/enemy_bat.tscn" id="3_bat"]
+[ext_resource type="PackedScene" uid="uid://s8corruptskeletonxx" path="res://scenes/original_campaign/enemy_skeleton.tscn" id="4_skel"]
+[ext_resource type="PackedScene" uid="uid://c5checkpointmonumentxx" path="res://scenes/original_campaign/checkpoint.tscn" id="5_cp"]
+[ext_resource type="PackedScene" uid="uid://c2crystalswitchxx" path="res://scenes/original_campaign/crystal_switch.tscn" id="6_switch"]
+[ext_resource type="PackedScene" uid="uid://m4movingplatformxx" path="res://scenes/original_campaign/moving_platform.tscn" id="7_plat"]
+[ext_resource type="PackedScene" uid="uid://c8hazardspikesxx" path="res://scenes/original_campaign/hazard_spikes.tscn" id="8_spikes"]
+[ext_resource type="PackedScene" uid="uid://c9breakablepotxx" path="res://scenes/original_campaign/pot_breakable.tscn" id="9_pot"]
+[ext_resource type="PackedScene" uid="uid://c7treasurechestxx" path="res://scenes/original_campaign/chest.tscn" id="10_chest"]
+[ext_resource type="PackedScene" uid="uid://p4portaltransitionxx" path="res://scenes/original_campaign/portal.tscn" id="11_portal"]
+[ext_resource type="PackedScene" uid="uid://hudauthentic2012" path="res://ui/hud.tscn" id="12_hud"]
+[ext_resource type="PackedScene" uid="uid://g8gameovermenuxx" path="res://ui/game_over_menu.tscn" id="13_gameover"]
+[ext_resource type="PackedScene" uid="uid://d4dialogueboxxx" path="res://ui/dialogue_box.tscn" id="14_dialogue"]
+
+[sub_resource type="Environment" id="Environment_catacombs"]
+background_mode = 1
+background_color = Color(0.03, 0.05, 0.09, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.18, 0.3, 0.42, 1)
+ambient_light_energy = 0.75
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sunken_brick"]
+albedo_color = Color(0.2, 0.28, 0.32, 1)
+roughness = 0.85
+
+[sub_resource type="BoxMesh" id="BoxMesh_catacombs_floor1"]
+material = SubResource("StandardMaterial3D_sunken_brick")
+size = Vector3(22, 4, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_catacombs_floor1"]
+size = Vector3(22, 4, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_catacombs_floor2"]
+material = SubResource("StandardMaterial3D_sunken_brick")
+size = Vector3(28, 5, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_catacombs_floor2"]
+size = Vector3(28, 5, 4)
+
+[node name="SequelSunkenCatacombs" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_catacombs")
+
+[node name="AquaticGlow1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+light_color = Color(0.15, 0.75, 0.85, 1)
+light_energy = 2.5
+omni_range = 16.0
+
+[node name="AquaticGlow2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3, 0)
+light_color = Color(0.2, 0.6, 0.9, 1)
+light_energy = 3.0
+omni_range = 18.0
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="FloorWest" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -2, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/FloorWest"]
+mesh = SubResource("BoxMesh_catacombs_floor1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/FloorWest"]
+shape = SubResource("BoxShape3D_catacombs_floor1")
+
+[node name="FloorEast" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -1, 0)
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/FloorEast"]
+mesh = SubResource("BoxMesh_catacombs_floor2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/FloorEast"]
+shape = SubResource("BoxShape3D_catacombs_floor2")
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Spawn_Default" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 0)
+
+[node name="Spawn_FromExpanse" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 0)
+
+[node name="Spawn_FromSpire" type="Marker3D" parent="Spawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 2.0, 0)
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.5, 0)
+
+[node name="CameraController" parent="Entities" instance=ExtResource("2_cam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, 0)
+
+[node name="MovingPlatform1" parent="Entities" instance=ExtResource("7_plat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 0)
+target_offset = Vector3(8, 0, 0)
+move_duration = 2.4
+
+[node name="HazardSpikes1" parent="Entities" instance=ExtResource("8_spikes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="EnemyBat1" parent="Entities" instance=ExtResource("3_bat")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+
+[node name="CheckpointCatacombs" parent="Entities" instance=ExtResource("5_cp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.8, 0)
+checkpoint_id = "sequel_catacombs_cp"
+
+[node name="EnemySkeleton1" parent="Entities" instance=ExtResource("4_skel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 2.2, 0)
+
+[node name="CrystalSwitch1" parent="Entities" instance=ExtResource("6_switch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 3.0, 0)
+switch_id = "catacombs_spire_gate"
+
+[node name="ChestCatacombs" parent="Entities" instance=ExtResource("10_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 2.2, 0)
+chest_id = "sequel_catacombs_chest"
+contains_item = "mana_potion"
+contains_coins = 250
+
+[node name="Pot1" parent="Entities" instance=ExtResource("9_pot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0)
+
+[node name="PortalToExpanse" parent="Entities" instance=ExtResource("11_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, 0)
+target_scene_path = "res://scenes/expansion/sequel_forsaken_expanse.tscn"
+target_spawn_name = "Spawn_FromCatacombs"
+
+[node name="PortalToSpire" parent="Entities" instance=ExtResource("11_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 2.0, 0)
+target_scene_path = "res://scenes/expansion/sequel_astral_spire.tscn"
+target_spawn_name = "Spawn_FromCatacombs"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("12_hud")]
+
+[node name="GameOverMenu" parent="UI" instance=ExtResource("13_gameover")]
+
+[node name="DialogueBox" parent="UI" instance=ExtResource("14_dialogue")]
