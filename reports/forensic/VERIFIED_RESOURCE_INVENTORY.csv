@@ -1,0 +1,20 @@
+path,category,format,size_bytes,sha256,provenance,usability_status
+swordigo.apk,package,apk_archive,22995439,86ce631bec342eaadbdef12904abe80f693af0925ae6f3edad1cecd6c9777f47,Supplied in project root,Identified as com.aptoide.android.aptoidegames (Third-Party App Store Client)
+classes.dex,bytecode,dalvik_dex,10242020,e1e07b399778db10a3014a42861e60058e0a174f88190c1fceecf9efd1cb81c0,Extracted from supplied APK,Aptoide client code & AndroidX (Contains NO Swordigo game code)
+classes2.dex,bytecode,dalvik_dex,8012700,4e421e428e235e2376ee17805d762a4fa39adff94e0e561fc37cb5b2b2b1a8f9,Extracted from supplied APK,Ad mediation SDKs (Contains NO Swordigo game code)
+classes3.dex,bytecode,dalvik_dex,8552368,a3443a9a14e9f74378f87e2f5b89eb02b1f83296c06a383b4b5e28a50c8227b4,Extracted from supplied APK,Google Play & Firebase SDKs (Contains NO Swordigo game code)
+classes4.dex,bytecode,dalvik_dex,2157836,bfbbad28a42f5674c997388ee0cb3e2004244a04d26f7c6e00b5220c81216d5e,Extracted from supplied APK,Unity mediation & GameGenie overlay (Contains NO Swordigo game code)
+lib/arm64-v8a/libandroidx.graphics.path.so,native_library,elf_shared_object,10096,9d05e263c95973e659b8be563fefb4b9b9a69c0d38b813d96924ffce56346b9a,Extracted from supplied APK,AndroidX vector path library (Unrelated to game)
+lib/arm64-v8a/libapplovin-native-crash-reporter.so,native_library,elf_shared_object,843152,4340d892adfb4864fa69ad93883a48eef920cb94e50889ec1b4b9c1d016c95d9,Extracted from supplied APK,AppLovin crash handler (Unrelated to game)
+lib/arm64-v8a/libdatastore_shared_counter.so,native_library,elf_shared_object,10360,b61326c9fa7dc40ad4ba8fc9a1e0954ecb37ba4ef7c030df1979b0024fe20700,Extracted from supplied APK,DataStore IPC counter (Unrelated to game)
+lib/arm64-v8a/libunitycoherencenative.so,native_library,elf_shared_object,493112,6d6f3009d17d5904d9c750cf39b4b0e5170d696616eb6ddf56e9fe861463cf60,Extracted from supplied APK,Unity Coherence bridge (Unrelated to game)
+AndroidManifest.xml,manifest,binary_axml,46736,c725da1fcab7ce4454b8d7c493ec19b48c0a87640398696d5952fdf3ad295484,Extracted from supplied APK,Package metadata for com.aptoide.android.aptoidegames
+resources.arsc,resource_table,binary_arsc,1399896,89c5f87b8b7e28a78627b0eb59a1df8a9947702f37a6ce2ffef123d6a42a98f1,Extracted from supplied APK,Android resource table for Aptoide client
+res/ (1001 files),android_resources,xml_png_drawables,5912304,various,Extracted from supplied APK,Aptoide client UI icons and layout XMLs (Contains NO Swordigo textures)
+assets/ (26 files),assets,json_xml_js,1262747,various,Extracted from supplied APK,Lottie UI animations and ad-viewer scripts (Contains NO Swordigo assets)
+authentic_pod_models (433 files),3d_models,powervr_pod,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
+authentic_pvr_textures (291 files),textures,powervr_pvr,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
+authentic_scene_levels (165 files),level_maps,protobuf_caver_scene,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
+authentic_scl_scripts (118 files),scripts,protobuf_lua_scl,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
+authentic_wav_sfx (82 files),audio_sfx,pcm_wav,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
+authentic_mp3_music (16 files),audio_music,mp3_stream,0,none,Historical RLSwordigo analysis reference,MISSING from current local filesystem
